@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>MPK ZONE | Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./home.css" />
+
+  <!-- GSI -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="bg__glow bg__glow--gold"></div>
+    <div class="bg__glow bg__glow--navy"></div>
+    <div class="bg__grain"></div>
+  </div>
+
+  <main class="app">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar__brand">
+        <div class="brand__name">MPK ZONE</div>
+        <div class="brand__school">SMP Tunas Harapan</div>
+      </div>
+
+      <div class="topbar__actions">
+        <button class="avatar avatar--gold" id="avatarBtn" type="button" aria-label="Akun">U</button>
+        <button class="btn-icon" id="menuBtn" type="button" aria-label="Menu">
+          <span class="hamburger" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Announcements (news + pin) -->
+    <section class="ann" id="annWrap" hidden>
+      <div class="ann__card ann__card--news" id="newsCard" hidden>
+        <div class="ann__tag">BERITA PENTING</div>
+        <div class="ann__title" id="newsTitle"></div>
+        <div class="ann__body" id="newsBody"></div>
+      </div>
+
+      <div class="ann__card ann__card--pin" id="pinCard" hidden>
+        <div class="ann__tag">PIN ADMIN</div>
+        <div class="ann__body" id="pinBody"></div>
+      </div>
+    </section>
+
+    <!-- Feed -->
+    <section class="feed">
+      <div class="feed__head">
+        <h2 class="feed__title">Timeline</h2>
+
+        <button class="btn-icon btn-icon--ghost" id="refreshBtn" type="button" aria-label="Refresh">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 12a8 8 0 0 1-14.9 4M4 12a8 8 0 0 1 14.9-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M20 7v5h-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 17v-5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="feed__list" id="feedList"></div>
+
+      <div class="empty" id="emptyState" hidden>
+        <div class="empty__card">
+          <div class="empty__icon" aria-hidden="true">✦</div>
+          <div class="empty__title">Belum ada postingan</div>
+          <div class="empty__desc">Jadilah yang pertama menulis sesuatu di sini!</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom stack: composer + nav -->
+  <footer class="bottom-stack" aria-label="Aksi bawah">
+    <div class="composer-bar" id="composerBar" role="button" tabindex="0">
+      <div class="composer-bar__avatar" id="composerAvatar" aria-hidden="true">U</div>
+
+      <div class="composer-bar__field">
+        <div class="composer-bar__placeholder" id="composerHint">Ketik sesuatu...</div>
+      </div>
+
+      <button class="composer-bar__send" id="composerSend" type="button" aria-label="Kirim">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 3 10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M21 3 14 21l-4-7-7-4 18-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Navigasi">
+      <div class="bottom-nav__wrap">
+        <a class="nav-item nav-item--active" href="/home/" aria-current="page">
+          <span class="nav-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 10.5L12 4l8 6.5V20a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 20v-9.5Z" stroke="currentColor" stroke-width="1.8" />
+              <path d="M9.5 21v-6h5v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="nav-txt">Home</span>
+        </a>
+
+        <a class="nav-item" href="/leaderboard/">
+          <span class="nav-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 20V10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12 20V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M19 20v-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="nav-txt">Rank</span>
+        </a>
+
+        <a class="nav-item" href="/gallery/">
+          <span class="nav-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 7.5A2.5 2.5 0 0 1 8.5 5h7A2.5 2.5 0 0 1 18 7.5v9A2.5 2.5 0 0 1 15.5 19h-7A2.5 2.5 0 0 1 6 16.5v-9Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 14l2.3-2.3a1.2 1.2 0 0 1 1.7 0L16 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M15.7 10.2h.01" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="nav-txt">Gallery</span>
+        </a>
+
+        <a class="nav-item" href="/lapor/">
+          <span class="nav-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 21V4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M6 5h10l-1 3 1 3H6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="nav-txt">Lapor</span>
+        </a>
+
+        <a class="nav-item" href="/profile/">
+          <span class="nav-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M4.5 20a7.5 7.5 0 0 1 15 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="nav-txt">Profil</span>
+        </a>
+      </div>
+    </nav>
+  </footer>
+
+  <!-- Menu Sheet -->
+  <div class="sheet" id="menuSheet" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="sheet__backdrop" data-close="menu" aria-hidden="true"></div>
+    <div class="sheet__panel sheet__panel--menu" role="document">
+      <div class="sheet__top">
+        <button class="btn-icon btn-icon--ghost" type="button" data-close="menu" aria-label="Tutup">×</button>
+        <div class="sheet__title">Menu</div>
+        <div></div>
+      </div>
+      <div class="sheet__content">
+        <div class="menuUser" id="menuUser">
+          <div class="avatar avatar--soft" id="menuAvatar">U</div>
+          <div class="menuUser__text">
+            <div class="menuUser__name" id="menuName">Guest</div>
+            <div class="menuUser__sub" id="menuSub">Belum login</div>
+          </div>
+        </div>
+
+        <div class="menuActions">
+          <button class="menuBtn" id="btnLogin">Login Google</button>
+          <button class="menuBtn menuBtn--danger" id="btnLogout" hidden>Logout</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Sheet -->
+  <div class="sheet" id="loginSheet" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="sheet__backdrop" data-close="login" aria-hidden="true"></div>
+    <div class="sheet__panel" role="document">
+      <div class="sheet__top">
+        <button class="btn-icon btn-icon--ghost" type="button" data-close="login" aria-label="Tutup">×</button>
+        <div class="sheet__title">Login dulu</div>
+        <div></div>
+      </div>
+
+      <div class="sheet__content">
+        <p class="hint">
+          Buat posting / like / reply, kamu wajib login Google.
+        </p>
+
+        <div class="gsiWrap">
+          <div id="gsiButton"></div>
+          <div class="hint2" id="gsiStatus"></div>
+        </div>
+      </div>
+
+      <div class="sheet__bottom">
+        <div class="sheet__replyOpt">MPK ZONE</div>
+        <button class="btn-post" type="button" data-close="login">Nanti dulu</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Composer Sheet -->
+  <div class="sheet" id="composerSheet" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="sheet__backdrop" data-close="composer" aria-hidden="true"></div>
+
+    <div class="sheet__panel" role="document">
+      <div class="sheet__top">
+        <button class="btn-icon btn-icon--ghost" type="button" data-close="composer" aria-label="Tutup">×</button>
+        <div class="sheet__title">Posting baru</div>
+        <div class="sheet__actions">
+          <button class="btn-icon" id="btnAttach" type="button" aria-label="Tambah foto">＋</button>
+        </div>
+      </div>
+
+      <div class="sheet__content">
+        <div class="sheet__user">
+          <div class="avatar avatar--soft" id="sheetAvatar">U</div>
+          <div class="sheet__userText">
+            <div class="sheet__userName" id="sheetName">Guest</div>
+            <div class="sheet__topic">Tulis command pakai “/”</div>
+          </div>
+        </div>
+
+        <textarea id="composerInput" class="sheet__textarea" placeholder="Apa yang baru?" maxlength="280"></textarea>
+
+        <div class="mediaPreview" id="mediaPreview" hidden>
+          <img id="mediaImg" alt="Preview" />
+          <button class="mediaRemove" id="mediaRemove" type="button">Hapus</button>
+        </div>
+
+        <div class="sheet__meta">
+          <div class="sheet__counter" id="charCounter">0/280</div>
+        </div>
+
+        <input id="fileInput" type="file" accept="image/*" hidden />
+      </div>
+
+      <div class="sheet__bottom">
+        <div class="sheet__replyOpt" id="postModeHint">Mode: Post</div>
+        <button class="btn-post" id="btnPost" type="button" disabled>Posting</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thread Sheet -->
+  <div class="sheet" id="threadSheet" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="sheet__backdrop" data-close="thread" aria-hidden="true"></div>
+    <div class="sheet__panel sheet__panel--thread" role="document">
+      <div class="sheet__top">
+        <button class="btn-icon btn-icon--ghost" type="button" data-close="thread" aria-label="Tutup">×</button>
+        <div class="sheet__title">Reply</div>
+        <div></div>
+      </div>
+
+      <div class="sheet__content thread">
+        <div id="threadHead"></div>
+        <div class="thread__list" id="threadList"></div>
+      </div>
+
+      <div class="sheet__bottom">
+        <button class="btn-post" id="btnReply" type="button">Balas</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="./home.js"></script>
+</body>
+          </html>
